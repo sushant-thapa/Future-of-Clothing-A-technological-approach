@@ -61,13 +61,49 @@ Generative Adversarial Networks (GANs) are a class of the deep neural networks w
 The Generative and Adversarial network compete in a game to fool one another, sort of like a race. On each epochs,the generative network or generator generates new images based on the input noise  the adversarial network learns from the training data and then uses that information to verify image produced by the generative network. The real image is classified as true for the discriminator while the generated image is classified as false. Now the loss is calculated and is used to update both discriminator and the generator. If all goes well, after a few epochs the generator is able to fool the discriminator with a generated image and we get a very lifelike and real image \textbf{[citation needed]}.
  
 Our architecture aims to provide a high quality geometric shapes as output. So vanilla GANs with fully connected networks cannot work as the one required as per our project. Thus we have looked into several other variation of GANs which we hope to mix in our architectures.
-\subsubsection{Deep Convolutional GAN}
-Deep Convolutinal GAN is a variation of GAN which is based on Deep Convolutional architecture. It uses Deep Convolutinal architecture for the dicriminator as well as Transpose Convolutional to scale the image from the noise in the generator. \cite{radford2015unsupervised}
-Furthermore we still have problems regarding the graphics element of the motifs and others. However, in this matter several work has already been done. As per \textbf{[ CITATION NEEDED ]} , generation of animation faces, which is similar in structure to motifs and designs are difficult to create using simple GAN architecture including the vanilla GAN architecture. The author also moves on to explain that the creation of the faces is faster and more accurate using a variant of GAN called StyleGAN.
 
-Style GAN is a Style-Based Generator Architecture for Generative Adversarial Networks is an alternative generator architecture for generative adversarial networks, borrowing from style transfer literature. The new architecture leads to an automatically learned, unsupervised separation of high-level attributes.
-Furthermore, we have also looked into the ProGAN as per \textbf{[CITATION NEEDED}] which discuss a new and faster way to train GANs.
-From these research papers, the experiment is underway to test if a better learning method is possible that combines the benefit of Style GAN and ProGAN to provide training results faster and then layer the obtained GAN to create a very high resolution image.
+\subsubsection{Deep Convolutional GAN}
+Deep Convolutinal GAN is a variation of GAN which is based on Deep Convolutional architecture. It uses Deep Convolutinal architecture for the dicriminator as well as Transpose Convolutional to scale the image from the noise in the generator. \cite{radford2015unsupervised}. The paper presents DCGAN as a topologically constrained variant of conditional GAN. The main benifit of usig DCGAN over classical GAN is that they are more stable to train and very useful in training unsupervised image representations. Furthermore, GANs are difficult to scale using CNN. The paper proposes to replace pooling layers with strided convolution i.e. no fully connected layers and replace it with convolutional counterparts. it further proposes to use LeakyReLU and batch normalization in all layers of discriminator while using ReLU and batch normalization in all layers of the generator(except output).
+\begin{figure}[h]
+    \includegraphics[scale=0.5]{images/softwareDiagrams/FinalSystemUseCase.png}
+    \centering
+    \caption{DCGAN architecture}    
+\end{figure}
+
+\subsubsection{StackGAN}
+A very innate problem of both DCGAN and vanilla GAN is that they are unable to be scaled to higher degree. GAN is structurally an unstable architecture and it needs a lot of work to achieve momentary stability. Furthermore the complexity of any image based neural network increases exponentially with the increase in the size of the input and output. Thus the GANs which consist of large image input and output are very unstable and require a lot of processing power along with other complications in the training method. \cite{zhang} \textbf{citation needed} proposed a new system to increase the size and quality of the image produced by the GAN. In layman terms this paper proposes to stack the output of smaller GANs to the larger GANs and increase the size of the output in two times increment.
+\begin{figure}[h]
+    \includegraphics[scale=0.5]{images/softwareDiagrams/FinalSystemUseCase.png}
+    \centering
+    \caption{StackGAN architecture}    
+\end{figure}
+
+
+\subsubsection{StyleGAN}
+GANs are very successful to provide high quality image of the natural environments and natural structures. However, vanilla and most other types of GAN fail to provide satisfactory output for a more geometric and cartoony images. StyleGAN aims to remove this problem through using a random noise in the middle of a generator architecture which will help with the sharper ends of the images.\textbf{[ CITATION NEEDED ]}. As per the website, generation of animation faces, which is similar in structure to motifs and designs are difficult to create using simple GAN architecture including the vanilla GAN architecture. The author also moves on to explain that the creation of the faces is faster and more accurate using a variant of GAN called StyleGAN.Style GAN is a Style-Based Generator Architecture for Generative Adversarial Networks is an alternative generator architecture for generative adversarial networks, borrowing from style transfer literature. The new architecture leads to an automatically learned, unsupervised separation of high-level attributes.
+\begin{figure}[h]
+    \includegraphics[scale=0.5]{images/softwareDiagrams/FinalSystemUseCase.png}
+    \centering
+    \caption{StyleGAN architecture}    
+\end{figure}
+
+
+\subsubsection{ProGAN}
+GANs have always been very hard and large to train. A group of researchers of NVIDIA corporation did extensive research and have proposed a better way to train GANs. Large GANs which have very large output donot seem to scale well with complexity. Thus\textbf{citations needed}
+\begin{figure}[h]
+    \includegraphics[scale=0.5]{images/softwareDiagrams/FinalSystemUseCase.png}
+    \centering
+    \caption{ProGAN architecture}    
+\end{figure}
+
+\subsubsection{WarrensteinGAN}
+GANs are very difficult to train. This difficulty is in part thanks to having no good metric to provide a way to measure the success of the GANs and other generating networks. Thus the researcher are pretty much eyeballing the learning rates and other mechanism of the design. WarrensteinGAN tries to make the learning method more easy by proposing a newer and better metric to calculate the loss of the gan and provide a way to quantify their progress. WarrensteinGAN uses earth distance as a progress bar to measure the advancement of the training and provides pretty good result \textbf{citration needed}
+\break
+
+\textbf{lots of formulas here}
+
+\subsubsection{some other gan i dont know}
+it use sone way or ther to improve quality shit ton \textbf{citations needd}
 
 \subsection{3D and Depth Maps}
 
@@ -152,7 +188,6 @@ Among the many datasets available, the MPII Human Shape dataset \textbf{ CITATIO
     
 \newpage    
 \section{Output}
- 
 
     
 
