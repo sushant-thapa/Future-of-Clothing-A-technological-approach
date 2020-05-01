@@ -1,0 +1,19 @@
+\contentsline {section}{Abstract}{ii}% 
+\contentsline {section}{Acknowledgement}{iii}% 
+\contentsline {section}{\numberline {1}Introduction}{1}% 
+\contentsline {section}{\numberline {2}Literature Review}{2}% 
+\contentsline {subsection}{\numberline {2.1}Generative Adversarial Networks}{2}% 
+\contentsline {subsubsection}{\numberline {2.1.1}Deep Convolutional GAN}{2}% 
+\contentsline {subsection}{\numberline {2.2}3D and Depth Maps}{3}% 
+\contentsline {subsection}{\numberline {2.3}UV Mapping}{3}% 
+\contentsline {section}{\numberline {3}Methodology}{4}% 
+\contentsline {subsection}{\numberline {3.1}Basic Structure of System}{4}% 
+\contentsline {subsection}{\numberline {3.2}Image Synthesis using GAN}{4}% 
+\contentsline {subsection}{\numberline {3.3}Generation of Human Body}{5}% 
+\contentsline {subsection}{\numberline {3.4}Depth Maps to 3D}{5}% 
+\contentsline {subsubsection}{\numberline {3.4.1}Depth Map Extraction}{5}% 
+\contentsline {subsubsection}{\numberline {3.4.2}Depth Map to Point Cloud}{6}% 
+\contentsline {section}{\numberline {4}Output}{7}% 
+\contentsline {section}{\numberline {5}Performance and Analysis}{7}% 
+\contentsline {section}{\numberline {6}Conclusion}{7}% 
+\contentsline {section}{\numberline {7}lines to be added}{7}% 
