@@ -96,15 +96,29 @@ GANs have always been very hard and large to train. A group of researchers of NV
     \caption{ProGAN architecture}    
 \end{figure}
 
-\subsubsection{WarrensteinGAN}
+\subsubsection{Wasserstein GAN}
 GANs are very difficult to train. This difficulty is in part thanks to having no good metric to provide a way to measure the success of the GANs and other generating networks. If the discriminator learns faster than the generator, the generator parameters will fail to optimize. On the other hand, if the discriminator learns more slowly, then the gradients may vanish before reaching the generator.
-In the worst case, if the discriminator is unable to converge, the generator is not going to be able to get any useful feedback. Thus the researcher are pretty much eyeballing the learning rates and other mechanism of the design. WarrensteinGAN tries to make the learning method more easy by proposing a newer and better metric to calculate the loss of the gan and provide a way to quantify their progress. Discussed first in paper \c
-\break
+In the worst case, if the discriminator is unable to converge, the generator is not going to be able to get any useful feedback. Thus the researcher are pretty much eyeballing the learning rates and other mechanism of the design. WarrensteinGAN tries to make the learning method more easy by proposing a newer and better metric to calculate the loss of the gan and provide a way to quantify their progress.
 
-\textbf{lots of formulas here}
+Discussed first in paper \cite{arjovsky2017wasserstein}  Arjovsky et al. it proposes to use Wasserstein 1 loss or Earth-Mover Distance (EMD) to optimize the GAN. This stabilises the GAN training and thus gives us more favourable training environment.
 
-\subsubsection{some other gan i dont know}
-it use sone way or ther to improve quality a lots \textbf{citations needd}
+
+\subsubsection{Least Square GAN}
+WGAN proposed to address the problem by using the EMD or Wasserstein loss function which has a smooth differentiable function even when there is little
+or no overlap between the two distributions. However, WGAN is not concerned
+with the generated image quality. Apart from stability issues, there are still areas of
+improvement in terms of perceptive quality in the generated images of the original
+GAN. LSGAN theorizes that the twin problems can be solved simultaneously.
+LSGAN proposes the least squares loss. Figure 5.2.1 demonstrates why the use of
+a sigmoid cross entropy loss in the GAN results in poorly generated data quality.
+Ideally, the fake samples distribution should be as close as possible to the true
+samples' distribution. However, for GANs, once the fake samples are already
+on the correct side of the decision boundary, the gradients vanish.
+ Using the least
+squares loss function, the gradients do not vanish as long as the fake samples
+distribution is far from the real samples' distribution. The generator will strive
+to improve its estimate of real density distribution even if the fake samples are
+already on the correct side of the decision boundary.
 
 \subsection{3D and Depth Maps}
 
