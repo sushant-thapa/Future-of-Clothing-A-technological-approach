@@ -71,7 +71,7 @@ Deep Convolutinal GAN is a variation of GAN which is based on Deep Convolutional
 \end{figure}
 
 \subsubsection{StackGAN}
-A very innate problem of both DCGAN and vanilla GAN is that they are unable to be scaled to higher degree. GAN is structurally an unstable architecture and it needs a lot of work to achieve momentary stability. Furthermore the complexity of any image based neural network increases exponentially with the increase in the size of the input and output. Thus the GANs which consist of large image input and output are very unstable and require a lot of processing power along with other complications in the training method. \cite{zhang} \textbf{citation needed} proposed a new system to increase the size and quality of the image produced by the GAN. In layman terms this paper proposes to stack the output of smaller GANs to the larger GANs and increase the size of the output in two times increment.
+A very innate problem of both DCGAN and vanilla GAN is that they are unable to be scaled to higher degree. GAN is structurally an unstable architecture and it needs a lot of work to achieve momentary stability. Furthermore the complexity of any image based neural network increases exponentially with the increase in the size of the input and output. Thus the GANs which consist of large image input and output are very unstable and require a lot of processing power along with other complications in the training method. \cite{zhang2016stackgan} A paper published by Zhang et al. proposed a new system to increase the size and quality of the image produced by the GAN. In layman terms this paper proposes to stack the output of smaller GANs to the larger GANs and increase the size of the output in two times increment.
 \begin{figure}[h]
     \includegraphics[scale=0.5]{images/softwareDiagrams/FinalSystemUseCase.png}
     \centering
@@ -97,8 +97,8 @@ GANs have always been very hard and large to train. A group of researchers of NV
 \end{figure}
 
 \subsubsection{WarrensteinGAN}
-GANs are very difficult to train. This difficulty is in part thanks to having no good metric to provide a way to measure the success of the GANs and other generating networks. If the discriminator learns faster than the generator, the generator parameters will fail to optimize. On the other hand, if the discriminator learns more slowly, then the gradients may vanish before reaching the generator. In the worst
-case, if the discriminator is unable to converge, the generator is not going to be able to get any useful feedback. Thus the researcher are pretty much eyeballing the learning rates and other mechanism of the design. WarrensteinGAN tries to make the learning method more easy by proposing a newer and better metric to calculate the loss of the gan and provide a way to quantify their progress. WarrensteinGAN uses earth distance as a progress bar to measure the advancement of the training and provides pretty good result \textbf{citration needed}
+GANs are very difficult to train. This difficulty is in part thanks to having no good metric to provide a way to measure the success of the GANs and other generating networks. If the discriminator learns faster than the generator, the generator parameters will fail to optimize. On the other hand, if the discriminator learns more slowly, then the gradients may vanish before reaching the generator.
+In the worst case, if the discriminator is unable to converge, the generator is not going to be able to get any useful feedback. Thus the researcher are pretty much eyeballing the learning rates and other mechanism of the design. WarrensteinGAN tries to make the learning method more easy by proposing a newer and better metric to calculate the loss of the gan and provide a way to quantify their progress. Discussed first in paper \c
 \break
 
 \textbf{lots of formulas here}
@@ -156,6 +156,7 @@ Among the many datasets available, the MPII Human Shape dataset \textbf{ CITATIO
         \caption{Proposed GAN pipeline}
     \end{figure}
     
+    \subsubsection{Data Aquisition}
     
     \subsection{Generation of Human Body}
     
@@ -221,11 +222,44 @@ The process of mapping texture to a 3d object is called UV unwrapping. The proce
 
 \subsubsection{Vanilla GAN with Stanford dog dataset}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/dogGAN.png}
+    \caption{Vanilla GAN with Stanford dog dataset}
+\end{figure}
+
+
 \subsubsection{Vanilla GAN with Stanford Flower Dataset}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/UVUnwrapping.png}
+    \caption{Vanilla GAN with Stanford flower dataset}
+\end{figure}
+
 
 \subsubsection{Shapes with Vanilla GAN with Local Dataset}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/GANunmodified.png}
+    \caption{Vanilla GAN with Local Unmodified data}
+\end{figure}
+
+
 \subsubsection{ZigZag line with DCGAN with local and synthesized dataset}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/DCGANunmodified.png}
+    \caption{DCGAN result with Local Unmodified data}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/DCGANmodified.png}
+    \caption{DCGAN result with Synthetic data}
+\end{figure}
 
 \section{Performance and Analysis}
 
