@@ -1,5 +1,6 @@
 \documentclass{article}
-
+\usepackage{float} % this is for image placement
+\usepackage{blindtext}
 \usepackage{fullpage}
 \usepackage{graphicx} % this is so that we can have images
 \graphicspath{{/images}} %path to images
@@ -160,36 +161,55 @@ Among the many datasets available, the MPII Human Shape dataset \textbf{ CITATIO
     
     \subsection{Depth Maps to 3D}
     
-    A depth map is to distance, as a thermal image is to temperature. The closer the object, the darker it is, or lighter depending on the exact algorithm used. Just looking at a depth map does not say a lot except how far the objects are. We do not want to just know how far the object is, we want to recreate its 3D object and manipulate it or view it. An important thing to note here is that the depth map only provides us with one side of the 3d object, as evident by the point cloud below. 
+    A depth map is to distance, as a thermal image is to temperature. The closer the object, the darker it is, or lighter depending on the exact algorithm used. Just looking at a depth map does not say a lot except how far the objects are. We do not want to just know how far the object is, we want to recreate its 3D object and manipulate it or view it. An important thing to note here is that the depth map only provides us with one side of the 3d object, as evident by figure 
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=5cm]{images/imageDMPC.png}
+        \includegraphics[width=15cm]{images/imageDMPC.png}
         \caption{Image with corresponding Depth Map,Point Cloud and Triangle Mesh}
         \label{fig:my_label}
     \end{figure}
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[scale=0.07]{images/depthMapSample.png}
-        \caption{Sample image along with extracted depth map}
-    \end{figure}
     
     \subsubsection{Depth Map Extraction}
     
     A command line tool, called ExifTool was used to extract the depth information. It is a platform-independent Perl library plus a command-line application for reading, writing and editing meta-information in a wide variety of files. 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.07]{images/depthMapSample.png}
+        \caption{Sample image along with extracted depth map}
     
-    \subsubsection{Depth Map to Point Cloud}
+    \end{figure}
     
     
+    \subsubsection{Depth Maps to Point Cloud}
     
+  
+  The extraction was done akin to how an actual 3d scanner works. It was assumed that the camera was in the centre of the image. A line was drawn from the camera to every pixel, then they were translated in that Line according to  their RGB values, which produces realistic renders. The illustration of the algorithm is shown in figure. It can be noticde how the darker portion of the depthmap is translated closer to the camera whereas the lighter portion of the depthmap is translated closer to the wall.
+  
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=15cm]{images/pointCloudGenerationAlgorithm.png}
+		\caption{Illustration of Point Cloud Generation Algorithm}
+	\end{figure}		
     
-    
+    \subsubsection{Point Cloud Triangulation}
+    The surfaces must be triangulated to obtain 3D object. Normally, you can’t triangulate perfectly, as you have less information in a point cloud than a triangle mesh. In our case, we have the relation between all the pixels, and in turn all the points. This helped us achieve 100\% perfect triangulation. The result so far is a very crisp triangular mesh: A 3d object with no colors/textures. The textures need to be mapped on to the object.
+\section{UV Mapping}
+The process of mapping texture to a 3d object is called UV unwrapping. The process is illustrated in figure 8. When you are building an object from scratch, you also build the textures from scratch. However, we already have the textures in the colored photo. Since we also have the relationship between the surfaces and pixels, we also have the map of textures to the surfaces. The corresponding textures are now rendered in their appropriate surfaces.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/UVUnwrapping.png}
+    \caption{UV unwrapping illustration}
+    \label{fig:my_label}
+\end{figure}
+
+
     
 \newpage    
 \section{Output}
-
-    
+Will be added in time
 
 \section{Performance and Analysis}
 
