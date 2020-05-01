@@ -157,6 +157,33 @@ Among the many datasets available, the MPII Human Shape dataset \textbf{ CITATIO
     \end{figure}
     
     \subsubsection{Data Aquisition}
+    Data aquisition being the first and foremost job in any machine learning project, we also got the data for our experiments early on. Data from various online sources including Kaggle and Google dataset. However we couldnt find proper and usable data for the motifs and shapes. These data were recieved from alternative technology, which deals with the research in field of ai and image processing.
+    The dataset used for Dog and Flower generation were both taken from the Stanford university dataset. These datasets were used to give proper results in the earlier experiments and consisted of about 2000 flowers and 25000 dogs.
+    The dataset recieved from the company was extensive and had about 8000 pictures of varying degrees. Out of those, we used a 300 image rich folder consisting of zigzag lines and blew the size up in the next stage.The data aquired are unclean and mostly consist of 512*512 pixels sized images in png format. The data however seems very varied and may not work in complete perfection. So, the next step will be cleaning the data.
+    
+    \subsubsection{Data Cleaning}
+    There are 77 folders in the data recieved. The folders were not only populated with images but also consisted of other unwanted files. These unwanted files were scraped and deleted manually. The incoherent directory structure was made coherent by taking the image folders to upper level manually. Most of these folders consist of about >100 images in consistent sizes. These images and folders can be used for image generation. However some consisted of about <30 images. These images can produce noise during training. So, they are kept seperately. The incoherent size of images are to be cropped or filled in to provide a coherent size of the image, which will be 512*512 px.
+    
+    \subsubsection{Synthetic Data Production}
+    The remaining data becomes very few in number and it becomes impossible to train the delicately precise gan with so little data no matter how many epochs it is trained for. So, synthetic data needs to be produced from the present data. Simple procedures are used to make new data from the existing data. The synthetic data production uses four basic transformations for changing data. A basic 6 bit random binary number was generated and used to provide the switch for the application of different transformations. The total variation becomes about 23-bits variations which is quite good considering the lismitations of the data. We however use only about 200 samples to increase our data. For a geometric model data like ours, this becomes quite good and gives us very good result.
+    They are as follows:
+    \begin{itemize}
+	\item Stretching and Squashing
+	
+	The image was stretched and/or squashed by a random pixels from 0 to 15\% of the total size of the image in a step of 3. for a 512 px image it provides 25 different random conditions.
+	\item Cropping
+	
+	The image was cropped upto 10\% of the total width of the image randomly in step of 1. This Gives us about 50 different random conditions in each side, totalling to 100 conditions.
+	\item Transpose
+	
+	Transpose is possible in two ways, horizontal and vertical. Horizontal transpose flips the image horizontally, while vertical transpose flips image vertically.
+	\item Rotate
+	
+	The image can be rotated whole 360 degrees without losing details. Thus we rotate image from 0 to 90 degrees in a step of 1 degree. Thus we have 360 different random conditions for the data
+    \end{itemize}
+    
+    \subsubsection{GAN Training}
+    The GAN is then trained to provide new styles. Up until now we have trained the GAN in 28 px square images. However, this will be improved using the stack GAN which will help us with higher size images GAN training. The training took about 11 second per cycle for 28*28 px images which numbered about 56000 in size of the dataset. This GAN was trained for 50 epochs but the best result was seen in the 40th epoch, which was thus used as the final result. Further on the road we aim to get 512*512 size of image using stack GAN. Higher order GANs require a lot more time to train and thus are quite lengthy to train.
     
     \subsection{Generation of Human Body}
     
@@ -213,15 +240,14 @@ The process of mapping texture to a 3d object is called UV unwrapping. The proce
     \caption{UV unwrapping illustration}
 \end{figure}
 
-
-    
 \newpage    
 \section{Output}
 
 \subsection{GAN outputs}
+We have until now trained different and modified versions of opensource, available and stable variation of GANs.Out of different types of GANs these four stand out the most. The type of GANs we have trained includes vanilla GAN with modified structure and DCGAN with pure structure. The vanilla GAN used trained the discriminator first and Generator last to stabilise the training of the GAN. While this provides low quality but stable output, it suffers greatly from mode collapse and dynamic training i.e. training discriminator and generator different times and stopping prematurely. The Vanilla GAN being stable was trained on 64*64 images while the DCGAN was trained on 28*28 images since the GAN was unstable and needed quick experimentation. Previous efforts to port DCGAN was unsuccessful due to the architectural inadequacy. We now however can attempt to do that again with greater chance of success.
 
 \subsubsection{Vanilla GAN with Stanford dog dataset}
-
+The first experimentation which used 25000 dog images of size 64*64 in color. The result can be considered satisfactory. No mode-collapse was seen in this experiment. The kernel used was taken from a public GitHub repository RoyMachineLearning/Generative-Dog-Images.
 \begin{figure}[H]
     \centering
     \includegraphics[width=15cm]{images/dogGAN.png}
@@ -230,34 +256,36 @@ The process of mapping texture to a 3d object is called UV unwrapping. The proce
 
 
 \subsubsection{Vanilla GAN with Stanford Flower Dataset}
+The second experiment was flower dataset. It consisted of 2000 images. A modified version of dog kernel used in the earlier experiment was used. While the data looks quite good from outside, it may however have suffered from mode-collapse internally. We classify this as a sort of middle ground between success and failure. On other hand, we got an idea of dataset size limit from this experiment.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{images/UVUnwrapping.png}
+    \includegraphics[width=5cm]{images/FlowerGANdandelion.png}
+    \includegraphics[width=5cm]{images/FlowerGANdandelion2.png}
     \caption{Vanilla GAN with Stanford flower dataset}
 \end{figure}
 
 
 \subsubsection{Shapes with Vanilla GAN with Local Dataset}
-
+In this we trained the same GAN structure with about 500 images of floral designs. However, we were unable to get any result due to inherent limitation of the vanilla GAN. From this, we shifted our focus from simple vanilla GAN to advanced variations of GANs, which includes DCGAN and other GANs. The image shown here were trained here with vanilla GAN at 64*64 pixels.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{images/GANunmodified.png}
+    \includegraphics[width=8cm]{images/GANunmodified.png}
     \caption{Vanilla GAN with Local Unmodified data}
 \end{figure}
 
 
 \subsubsection{ZigZag line with DCGAN with local and synthesized dataset}
-
+In this experiment we conducted two different scenarios. We were trying to experiment with overtraining the GAN with few data on one hand, while we were trying out the synthesized dataset variation on the other hand. The first scenario was however not successful as it didnt produce anything remotely like the dataset provided, no matter how hard we tried. The synthetic dataset however shows promise for the future. The results are shown below.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{images/DCGANunmodified.png}
+    \includegraphics[width=8cm]{images/DCGANunmodified.png}
     \caption{DCGAN result with Local Unmodified data}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{images/DCGANmodified.png}
+    \includegraphics[width=8cm]{images/DCGANmodified.png}
     \caption{DCGAN result with Synthetic data}
 \end{figure}
 
