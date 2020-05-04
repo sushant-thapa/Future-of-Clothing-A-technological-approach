@@ -1,0 +1,268 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=latex 2020.5.1)  1 MAY 2020 14:24
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**report.tex
+(./Report/report.tex
+LaTeX2e <2019-10-01> patch level 1
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/08/27 v1.4j Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2019/08/27 v1.4j Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-dist/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip43
+)
+(/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/10/08 v1.3c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvips.def on input line 105.
+
+(/usr/share/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+No file report.aux.
+\openout1 = `report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 21.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 21.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 21.
+[1
+
+] [2] [3]
+No file report.toc.
+\tf@toc=\write3
+\openout3 = `report.toc'.
+
+No file report.lof.
+\tf@lof=\write4
+\openout4 = `report.lof'.
+
+[4]
+
+LaTeX Warning: File `images/softwareDiagrams/FinalSystemUseCase.png' not found 
+on input line 47.
+
+
+! LaTeX Error: File `"images/softwareDiagrams/""FinalSystemUseCase".png' not fo
+und.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 ...s/softwareDiagrams/FinalSystemUseCase.png}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "images/softwareDiagrams/""F
+inalSystemUseCase".png (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 ...s/softwareDiagrams/FinalSystemUseCase.png}
+                                                  
+? 
+File: "images/softwareDiagrams/""FinalSystemUseCase".png Graphic file (type eps
+)
+<"images/softwareDiagrams/""FinalSystemUseCase".png> [1]
+
+LaTeX Warning: Citation `radford2015unsupervised' on page 2 undefined on input 
+line 65.
+
+[2] [3]
+
+LaTeX Warning: File `images/basicArchitecture.png' not found on input line 96.
+
+
+! LaTeX Error: File `"images/""basicArchitecture".png' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.96 ...[scale=0.75]{images/basicArchitecture.png}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "images/""basicArchitecture"
+.png (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.96 ...[scale=0.75]{images/basicArchitecture.png}
+                                                  
+? 
+File: "images/""basicArchitecture".png Graphic file (type eps)
+<"images/""basicArchitecture".png>
+
+LaTeX Warning: File `images/dogGAN.png' not found on input line 107.
+
+
+! LaTeX Error: File `"images/""dogGAN".png' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.107 ...udegraphics[scale=0.5]{images/dogGAN.png}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "images/""dogGAN".png (no Bo
+undingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.107 ...udegraphics[scale=0.5]{images/dogGAN.png}
+                                                  
+? 
+File: "images/""dogGAN".png Graphic file (type eps)
+<"images/""dogGAN".png>
+
+LaTeX Warning: File `images/humanModel.png' not found on input line 119.
+
+
+! LaTeX Error: File `"images/""humanModel".png' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.119 ...  \includegraphics{images/humanModel.png}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "images/""humanModel".png (n
+o BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.119 ...  \includegraphics{images/humanModel.png}
+                                                  
+? 
+File: "images/""humanModel".png Graphic file (type eps)
+<"images/""humanModel".png> [4]
+
+LaTeX Warning: File `images/imageDMPC.png' not found on input line 131.
+
+
+! LaTeX Error: File `"images/""imageDMPC".png' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.131 ...graphics[width=5cm]{images/imageDMPC.png}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "images/""imageDMPC".png (no
+ BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.131 ...graphics[width=5cm]{images/imageDMPC.png}
+                                                  
+? 
+File: "images/""imageDMPC".png Graphic file (type eps)
+<"images/""imageDMPC".png>
+
+LaTeX Warning: File `images/depthMapSample.png' not found on input line 138.
+
+
+! LaTeX Error: File `"images/""depthMapSample".png' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.138 ...cs[scale=0.07]{images/depthMapSample.png}
+                                                  
+? 
+
+! LaTeX Error: Cannot determine size of graphic in "images/""depthMapSample".pn
+g (no BoundingBox).
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.138 ...cs[scale=0.07]{images/depthMapSample.png}
+                                                  
+? 
+File: "images/""depthMapSample".png Graphic file (type eps)
+<"images/""depthMapSample".png> [5]
+No file report.bbl.
+[6] (./report.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 659 strings out of 492168
+ 8540 string characters out of 6131585
+ 73205 words of memory out of 5000000
+ 5060 multiletter control sequences out of 15000+600000
+ 7895 words of font info for 28 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 28i,6n,23p,1203b,257s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on report.dvi (10 pages, 21848 bytes).
