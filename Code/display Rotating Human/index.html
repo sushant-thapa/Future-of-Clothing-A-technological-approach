@@ -1,0 +1,88 @@
+<html>
+<script type ="module">
+	import * as THREE from "./three.js/build/three.module.js"
+	import {OBJLoader2} from "./three.js/examples/jsm/loaders/OBJLoader2.js"
+	const loader = new THREE.TextureLoader()
+	const radiusOfCamera=310
+	const heightOfCamera=300
+	const meroCanvas = document.getElementById("myCanvas");
+	const renderer = new THREE.WebGLRenderer({canvas:meroCanvas})
+//camera
+	const fov=90 //75 degrees
+	const aspect = 2;
+	const near =0.1;
+	const far=10000;
+	const camera = new THREE.PerspectiveCamera(fov,aspect,near,far)
+	  // // these enable mouse functionality
+  	
+
+	const scene = new THREE.Scene();
+
+	
+	console.log(scene)
+	const material = new THREE.MeshPhongMaterial({map: loader.load('./floral.jpg')})
+	
+	let length = 1;
+	const geomtery = new THREE.BoxGeometry(length,length,length)
+	const cube = new THREE.Mesh(geomtery,material)
+	let man = cube
+	// scene.add(cube)
+	camera.position.z=radiusOfCamera;
+	camera.position.y=heightOfCamera;	
+
+	//we need some light
+	{
+		const color =0xffffff;
+		const intensity=0;
+		const light  = new THREE.DirectionalLight(color,intensity)
+		light.position.set(0,10,0);
+		light.target.position.set(-5,0,0)
+		scene.add(light);
+		scene.add(light.target)
+	}
+
+	// hemisphere light
+	  {
+    const skyColor = 0xB1E1FF;  // light blue
+    const groundColor = 0xB97A20;  // brownish orange
+    const intensity = 1;
+    const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+    scene.add(light);
+  }
+
+	{
+  const objLoader = new OBJLoader2();
+ 
+  objLoader.load('man_free.obj', (root) => {
+  	root.rotation.y=0;
+  	man=root
+  
+    scene.add(root);
+  });
+  
+}
+	
+
+	renderer.render(scene,camera)
+
+	function render(time)
+	{
+		time*=0.001
+		updateCamera(camera,time)
+		renderer.render(scene,camera)
+		requestAnimationFrame(render)
+	}
+
+requestAnimationFrame(render);
+
+function updateCamera(cam,time)
+{
+	man.rotation.y=time
+}
+</script>
+	<body>
+		<canvas id="myCanvas" height="500" width="1000" ></canvas>
+
+	</body>
+
+</html>
