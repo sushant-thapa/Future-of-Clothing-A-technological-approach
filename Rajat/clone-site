@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -rf tAIlor
+git clone https://github.com/rjpj2016/tAIlor.git
+
