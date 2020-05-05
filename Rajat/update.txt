@@ -1,8 +1,0 @@
-As of 04/05/2020
-
-    1. Programatically manipulating/viewing the object with textures:
-        Current tools (open3d) pose limitations with wrapping a texture
-        around an object. While the rough end result is already viewable
-        in Photoshop, I am making it programatically accessible. The project
-        is under migration from python to javascript (React + three.js).
-        I am still learning the basics of three.js
