@@ -4,6 +4,10 @@
 \usepackage{fullpage}
 \usepackage{graphicx} % this is so that we can have images
 \graphicspath{{/images}} %path to images
+
+\usepackage{biblatex}
+
+
 \renewcommand*\contentsname{Table of Contents} % changing the default title of table of contents simply from "contents"
 
 
@@ -22,7 +26,7 @@ Maharshi Bhusal, Rajat Parajuli, Sushant Thapa}
 \maketitle
 \newpage
 
-\section*{Acknowledgement}
+    \section*{Acknowledgement}
 \addcontentsline{toc}{section}{Abstract} % it is important to add this line after section, instead of before the \begin{document} line as doing so generates erroneous output
 We would like to express our gratitude to the Department of Electronics and Computer Engineering of the Institute of Engineering, Pulchowk Campus for providing a platform for exchanging knowledge and developing one’s personal creativity. All guidance and resources provided by the college has been crucial in our vision that we present today. By assigning a major project as part of the fulfilment of the Bachelors’ Degree in Computer Engineering, the Department has helped us develop technical skills and convey the necessities in handling real life projects in the future.
 We are indebted to Dr Jyoti Tandukar for being our supervisor and guiding us towards a feasible project roadmap. His guidance, experiences and expertise have been a boon for our group and crucial in developing our project to the stage it has reached. We would also like to extend our gratitude to the staff of Alternative Technology who have supported us throughout our project timeline.
@@ -97,19 +101,12 @@ LSGAN proposes the least squares loss.
 Ideally, the fake samples distribution should be as close as possible to the true samples' distribution. However, for GANs, once the fake samples are already on the correct side of the decision boundary, the gradients vanish.
 
  Using the least squares loss function, the gradients do not vanish as long as the fake samples distribution is far from the real samples' distribution. The generator will strive to improve its estimate of real density distribution even if the fake samples are already on the correct side of the decision boundary.
-
+    \subsection{Shading Model}
+    PHONG SHADING MODEL
     \subsection{3D Human Model Construction }
 There has been a lot of work done in the construction, use and manipulation of three-dimensional human body models for various purposes. Many researchers have used 3D full body scanners, 3D cameras and even the Xbox Kinect camera to capture and map human models. Similarly, a lot of research has be done to manipulate and generate new human models from the assets available by training regression functions to correlate semantically significant values or by employing the use of principal component analysis on feature curves and segment patches drawn onto the model and thus modified. Our project will employ a mix of principal component analysis and linear regression models to generate parameters on the human body model and allow general modifications.
 
-	\subsection{WebGL and Three.js}
-	   \begin{figure}[h]
-            \centering
-            \includegraphics[scale=0.75]{images/threeDotJS/threeJsStructure.png}
-            \caption{basic architecture of system}
-        \end{figure}
-
-	 
-    \subsection {UV Mapping}
+\subsection {UV Mapping}
 UV mapping is the process of mapping textures from an image into the surfaces of a 3D object. 
 
 When a model is created as a polygon mesh using a 3D modeller, UV coordinates (also known as texture coordinates) can be generated for each vertex in the mesh. One way is for the 3D modeller to unfold the triangle mesh at the seams, automatically laying out the triangles on a flat page. If the mesh is a UV sphere, for example, the modeller might transform it into an equirectangular projection. Once the model is unwrapped, the artist can paint a texture on each triangle individually, using the unwrapped mesh as a template. When the scene is rendered, each triangle will map to the appropriate texture from the "decal sheet".
@@ -125,6 +122,47 @@ UV mapping may use repeating textures, or an injective 'unique' mapping as a pre
 Among the many datasets available, the MPII Human Shape dataset is a readily available free dataset that was used which was based on the widely used statistical body representation and learned from the CAESAR dataset, the largest commercially available scan database to date. The Polygon File Format (.ply) files obtained from the dataset formed the generic point cloud shape of the human body which was further processed in a commercially available software MeshLab for the calculation of normal and triangulation. Further work could employ Delaunay triangulation and also spherical parameterization of 3D meshes for more optimized mesh construction, manipulation and also for better texture mapping.
 
 \newpage
+\section{Important Programming Tools, Libraries and Methods}
+    \subsection{Javascript}
+    \textit{taken from https://developer.mozilla.org/}
+    \subsubsection{window.requestAnimationFrame()}The window.requestAnimationFrame() method tells the browser that you wish to perform an animation and requests that the browser calls a specified function to update an animation before the next repaint. The method takes a callback as an argument to be invoked before the repaint.
+	\subsection{WebGL and Three.js}
+
+
+	Three.js uses WebGL to draw 3D. WebGL is a very low-level system that only draws points, lines, and triangles. To do anything useful with WebGL generally requires quite a bit of code and that is where three.js comes in. It handles stuff like scenes, lights, shadows, materials, textures, 3d math, all things that one would have to write yourself if you were to use WebGL directly. %\cite{threejsfundamentals} 
+
+	   \begin{figure}[H]
+            \centering
+            \includegraphics[width=15cm]{images/threeDotJS/threeJsStructure.png}
+            \caption{Basic Structure of Three.js}
+        \end{figure}
+    \subsubsection{Renderer} This is one of the main objects of three.js. A scene and a camera is to a Renderer and it renders (draws) the portion of the 3D scene that is inside the frustum of the camera as a 2D image to a canvas.
+
+    \subsubsection{Scene Graph}  A scene graph in a 3D engine is a hierarchy of nodes in a graph where each node represents a local space. It is a tree like structure, consisting of various objects like a Scene object, multiple Mesh objects, Light objects, Group, Object3D, and Camera objects.
+    A Scene object defines the root of the scene graph and contains properties like the background color and fog. These objects define a hierarchical parent/child tree like structure and represent where objects appear and how they are oriented. Children are positioned and oriented relative to their parent. 
+    \begin{figure}[h]
+            \centering
+            \includegraphics[width=15cm]{images/threeDotJS/sceneGraph.png}
+            \caption{Scene Graph Structure}
+        \end{figure}
+        
+    \subsubsection{Camera}
+    Although a child of an object, does not have to be inside the scene graph to function.
+    
+    \subsubsection{Mesh objects}
+    Mesh objects represent drawing a specific Geometry with a specific Material. Both Material objects and Geometry objects can be used by multiple Mesh objects. 
+    \paragraph{Geometry objects} represent the vertex data of some piece of geometry like a sphere, cube, plane, dog, cat, human, tree, building and so forth. Three.js provides many kinds of built in geometry primitives. Custom geometry can also be created and geometry can be loaded from files as well.
+    
+    \paragraph{Material objects} represent the surface properties used to draw geometry including things like the color to use and how shiny it is. A Material can also reference one or more Texture objects which can be used, for example, to wrap an image onto the surface of a geometry.
+    
+    \subsubsection{Texture objects}
+    Texture objects generally represent images either loaded from image files, generated from a canvas or rendered from another scene.
+
+    \subsubsection{Light objects}
+    Light objects represent different kinds of lights.
+
+
+
 \section{Methodology}
 
     \subsection{Basic Structure of System}
