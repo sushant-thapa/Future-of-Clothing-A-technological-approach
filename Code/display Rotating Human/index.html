@@ -2,6 +2,7 @@
 <script type ="module">
 	import * as THREE from "./three.js/build/three.module.js"
 	import {OBJLoader2} from "./three.js/examples/jsm/loaders/OBJLoader2.js"
+	import {OrbitControls} from './three.js/examples/jsm/controls/OrbitControls.js'
 	const loader = new THREE.TextureLoader()
 	const radiusOfCamera=310
 	const heightOfCamera=300
@@ -13,20 +14,21 @@
 	const near =0.1;
 	const far=10000;
 	const camera = new THREE.PerspectiveCamera(fov,aspect,near,far)
-	  // // these enable mouse functionality
-  	
+	
+	// now we add orbit controls which will let users move with the mice
+	const controller = new OrbitControls(camera,meroCanvas)
+
 
 	const scene = new THREE.Scene();
 
 	
 	console.log(scene)
-	const material = new THREE.MeshPhongMaterial({map: loader.load('./floral.jpg')})
 	
 	let length = 1;
 	const geomtery = new THREE.BoxGeometry(length,length,length)
-	const cube = new THREE.Mesh(geomtery,material)
-	let man = cube
-	// scene.add(cube)
+	const cube = new THREE.Mesh(geomtery)
+	let man = cube // arbitrary assigmnet, which we will change later
+
 	camera.position.z=radiusOfCamera;
 	camera.position.y=heightOfCamera;	
 
@@ -69,6 +71,7 @@
 	{
 		time*=0.001
 		updateCamera(camera,time)
+		controller.update()
 		renderer.render(scene,camera)
 		requestAnimationFrame(render)
 	}
