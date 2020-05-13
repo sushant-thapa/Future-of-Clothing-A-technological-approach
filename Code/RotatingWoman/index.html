@@ -1,0 +1,67 @@
+<html>
+	<script type="module">
+		import * as THREE from "../three.js/build/three.module.js"
+		import {OBJLoader2} from "../three.js/examples/jsm/loaders/OBJLoader2.js"
+		import {OrbitControls} from '../three.js/examples/jsm/controls/OrbitControls.js';
+		import {MTLLoader} from '../three.js/examples/jsm/loaders/MTLLoader.js'
+		import {MtlObjBridge} from '../three.js/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
+
+		const canvas = document.getElementById("canvas")
+		const renderer = new THREE.WebGLRenderer({canvas})
+		const cGeometry = new THREE.BoxGeometry(5,5,5)
+		const scene = new THREE.Scene()
+		const material = new THREE.MeshPhongMaterial({color:0xff6633})
+		const cube = new THREE.Mesh(cGeometry,material)
+		const camera = new THREE.PerspectiveCamera(75,2,0.1,1000)
+		const controls = new OrbitControls(camera,canvas)
+		camera.position.set(5,0,5)
+		const DirectionalLight = new THREE.DirectionalLight(0xffffff,2) // this is a directional light
+		const HSLight = new THREE.HemisphereLight(0xB1E1FF,0xB97A20,1) // this is a hemisphere light
+	
+		function main(){
+			
+			
+			let windmill=cube;
+			{
+				DirectionalLight.position.set(1,5,1)
+				scene.add(HSLight,DirectionalLight)
+			}
+			
+			// loading the .obj
+			
+			const objLoader = new OBJLoader2();
+			objLoader.load('./genericF.obj',(root)=>{
+					scene.add(root)
+					root.scale.set(0.1,0.1,0.1)
+					root.position.y=-5
+					windmill=root;
+					renderer.render(scene,camera)
+				}
+)				
+
+			{
+				const mtlLoader = new MTLLoader();
+				mtlLoader.load('./genericF.mtl',(mtlParseResult)=>{
+					const materials = MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult
+						);
+					objLoader.addMaterials(materials);
+					
+				})
+			}	
+
+			function animate(time)
+			{
+				controls.update()
+				requestAnimationFrame(animate)
+				renderer.render(scene,camera)
+			}
+			requestAnimationFrame(animate)
+		}
+	main()
+	</script>
+	<canvas id="canvas" width="1000" height="500" >
+
+
+	</canvas>
+</html>
+
