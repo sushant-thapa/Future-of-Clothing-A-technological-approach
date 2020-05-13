@@ -1,5 +1,6 @@
 #for input tensor
-import tensorflow.random.normal as normal
+import tensorflow
+normal = tensorflow.random.normal
 from tensorflow.keras.models import load_model
 #to plot image
 import matplotlib.pyplot as plt
@@ -13,6 +14,8 @@ noise_dim =150
 
 #compile and load the model from the path
 generator = load_model(h5path,compile=True)
+
+print("Loading model Complete")
 
 #defining the endpoint
 def generate_image():
@@ -37,7 +40,7 @@ def generate_image():
   plt.savefig('./savefig.png')
   
   #unnecessary maybe but i am too lazy to change
-  plt.show()
+  #plt.show()
   
 
 
