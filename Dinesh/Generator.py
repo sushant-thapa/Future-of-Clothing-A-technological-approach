@@ -44,6 +44,6 @@ def generate_image():
   
 
 
-
-# the endpoint to call  
-generate_image()
+if __name__ == "__main__":
+  # the endpoint to call  
+  generate_image()
