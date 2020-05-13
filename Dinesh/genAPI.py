@@ -8,12 +8,16 @@ import Generator
 
 app = FastAPI()
 
-app.mount("/designs",StaticFiles(directory="designs"),name="designs")
+app.mount("/dinesh/designs",StaticFiles(directory="designs"),name="designs")
 
-@app.get("/generate")
-async def generate():
+@app.get("/dinesh/generate")
+async def generate(redirect: bool = True):
     unique_name = uuid.uuid1().hex
     Generator.generate_image("designs/{}.png".format(unique_name))
-    response = RedirectResponse(url="/designs/{}.png".format(unique_name))
-    return response
+    if redirect:
+        response = RedirectResponse(url="/designs/{}.png".format(unique_name))
+        return response
 
+    return {
+            "path":"dinesh/designs/{}.png".format(unique_name)
+            }
