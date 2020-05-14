@@ -15,7 +15,7 @@ async def generate(redirect: bool = True):
     unique_name = uuid.uuid1().hex
     Generator.generate_image("designs/{}.png".format(unique_name))
     if redirect:
-        response = RedirectResponse(url="/designs/{}.png".format(unique_name))
+        response = RedirectResponse(url="dinesh/designs/{}.png".format(unique_name))
         return response
 
     return {
