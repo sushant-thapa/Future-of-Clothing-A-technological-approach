@@ -28,10 +28,11 @@ def getTransformations(boundingBox):
         "y" : boundingBox["y"]["max"]-boundingBox["y"]["min"],
         "z" : boundingBox["z"]["max"]-boundingBox["z"]["min"]
     }
+    longest_side = max(dimensions.values())
     return [
-        lambda x: (x-center["x"]) / dimensions["x"],
-        lambda y: (y-center["y"]) / dimensions["y"],
-        lambda z: (z-center["z"]) / dimensions["z"]
+        lambda x: (x-center["x"]) / longest_side , 
+        lambda y: (y-center["y"]) / longest_side,
+        lambda z: (z-center["z"]) / longest_side
     ]
 
 def main():
