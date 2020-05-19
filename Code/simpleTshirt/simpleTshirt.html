@@ -1,0 +1,67 @@
+<html>
+	<script type="module">
+		import * as THREE from '../three.js/build/three.module.js';
+		import {OrbitControls} from '../three.js/examples/jsm/controls/OrbitControls.js'
+		const convas = document.getElementById("canvas")
+		const renderer = new THREE.WebGLRenderer({canvas})
+		const origin = {x:-3,y:0,z:0}
+
+
+		const cuboidGeometry = new THREE.BoxGeometry(3,3,1); //we have a geometry of a side 3 
+		const cylinderGeometry = new THREE.CylinderGeometry(0.5,0.5,2.8,16) 
+
+		const scene = new THREE.Scene()
+		
+		const light = new THREE.DirectionalLight(0xffffff,2) //color and intensity of light are passed as parameters
+		light.position.z=4;
+		const light2 = new THREE.DirectionalLight(0xffffff,2)
+		light.position.x=4
+		scene.add(light,light2)
+
+		const textureLoader = new THREE.TextureLoader();
+		const material = new THREE.MeshPhongMaterial({map:textureLoader.load('./floral.jpg')})
+		
+		//define Mesh
+		const cuboid = new THREE.Mesh(cuboidGeometry,material)
+		cuboid.position.set(origin.x,0,0)
+		const cylinder= new THREE.Mesh(cylinderGeometry,material)
+		const cylinder2 = new THREE.Mesh(cylinderGeometry,material)
+
+		cylinder.position.set(origin.x+2.5,origin.y+0.25,0)
+		cylinder.rotation.z=(Math.PI/3)
+		
+		cylinder2.position.set(origin.x-2.5,origin.y+0.25,0)
+		cylinder2.rotation.z=-(Math.PI/3)
+			
+
+
+
+		const camera = new THREE.PerspectiveCamera(75,2,0.2,100)
+		camera.position.z=4
+		
+
+		const orbitControls = new OrbitControls(camera,renderer.domElement)
+		
+		scene.add(cuboid,cylinder,cylinder2)
+		renderer.render(scene,camera)
+
+		function repeater (time)
+		{
+
+			
+			time*=0.001;
+
+			renderer.render(scene,camera)
+			requestAnimationFrame(repeater)
+		}
+		requestAnimationFrame(repeater)
+
+	</script>
+	<body>
+		<canvas id ="canvas" height="500" width="1000">
+		</canvas>
+
+		Hello, world!
+	</body>
+
+</html>
