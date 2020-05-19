@@ -1,0 +1,146 @@
+<html>
+<script type ="module">
+
+
+	import * as THREE from "./three.js/build/three.module.js"
+	import {OBJLoader2} from "./three.js/examples/jsm/loaders/OBJLoader2.js"
+	import {OrbitControls} from '../three.js/examples/jsm/controls/OrbitControls.js'
+	
+
+	const radiusOfCamera=310
+	const heightOfCamera=300
+	const meroCanvas = document.getElementById("myCanvas");
+	const renderer = new THREE.WebGLRenderer({canvas:meroCanvas})
+	
+
+//camera
+	const fov=90 //75 degrees 
+	const aspect = 2;
+	const near =0.1;
+	const far=10000;
+	const camera = new THREE.PerspectiveCamera(fov,aspect,near,far)
+	  // // these enable mouse functionality
+	const textureLoader = new THREE.TextureLoader();
+	const material2 = new THREE.MeshPhongMaterial({map:textureLoader.load('./floral.jpg')})
+
+	var controls = new OrbitControls(camera,renderer.domElement);
+
+
+	const scene = new THREE.Scene();
+
+	
+	
+	const material = new THREE.MeshPhongMaterial({color:0xffffff})
+	let length = 1;
+	const geomtery = new THREE.BoxGeometry(length,length,length)
+	const cube = new THREE.Mesh(geomtery,material)
+	
+
+	let man = cube
+	camera.position.z=radiusOfCamera;
+	camera.position.y=heightOfCamera;	
+
+	// we need some light
+	// hemisphere light
+	  {
+     const skyColor = 0xB1E1FF;  // light blue
+    const groundColor = 0xB97A20;  // brownish orange
+    const intensity = 1;
+    const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+    scene.add(light);
+  }
+  var cylinder = new THREE.Mesh(new THREE.CylinderGeometry(24,24,50),material2)
+  var cylinder2 = new THREE.Mesh(new THREE.CylinderGeometry(24,24,50),material2)
+  var cuboid1 = new THREE.Mesh(new THREE.BoxGeometry(20,33,16),material2)
+  var cuboid2 = new THREE.Mesh(new THREE.BoxGeometry(20,33,16),material2)
+  var upperRaidus =30
+  var lowerRadius = 50
+  var frustumHeight = 60
+  var chest = new THREE.Mesh(new THREE.CylinderGeometry(upperRaidus,lowerRadius,frustumHeight,16),material2)
+  var abs = new THREE.Mesh(new THREE.CylinderGeometry(45,36,80,16),material2)
+  var sphere1 = new THREE.Mesh(new THREE.SphereGeometry(22,20,20),material2)
+  var sphere2 = new THREE.Mesh(new THREE.SphereGeometry(22,20,20),material2)
+  var upperRaidus =30
+  	cylinder.position.set(50,280,-14)
+  	cylinder.rotation.set(0,0,0.5)
+  	cylinder2.position.set(-50,280,-24)
+  	cylinder2.rotation.set(0,0,-0.5)
+  	chest.position.set(0,290,-15)
+  	chest.rotation.set(0,0.8,0)
+  	sphere1.position.set(34,298,-19)
+  	sphere2.position.set(-34,298,-19)
+  	abs.position.set(0,285-frustumHeight,-10)	
+
+  	cuboid1.position.set(36,289,7)
+  	cuboid2.position.set(-36,287,7)
+  	console.log(cuboid1)
+  scene.add(cylinder,cylinder2,abs,chest,sphere1,sphere2,cuboid1,cuboid2)
+	
+
+	
+	{
+  const objLoader = new OBJLoader2();
+  objLoader.load('man_free.obj', (root) => {
+
+  	root.rotation.y=-Math.PI/2;
+  	man=root
+  	man.position.y=-100
+    scene.add(root);		
+  });
+
+ 
+  
+}
+	
+
+	renderer.render(scene,camera)
+
+	const updater = function render(time)
+	{
+
+		time*=0.001
+		man.position.y=-100
+		controls.update()
+		
+		// abs.rotation.set(document.getElementById('rotx').value,document.getElementById('roty').value,document.getElementById('rotz').value)
+
+  		
+  		// cuboid2.position.set(document.getElementById('posx').value,document.getElementById('posy').value,document.getElementById('posz').value)
+  		// frustum.position.z=document.getElementById('posz').value;
+  		
+		
+
+		renderer.render(scene,camera)
+		requestAnimationFrame(updater)
+	}
+
+requestAnimationFrame(updater);
+
+
+
+</script>
+	<body>
+		<canvas id="myCanvas" height="500" width="1000" ></canvas>
+		<span> x value</span><input id="posx" type="number" >  
+		<br>
+		<span> y value</span><input id="posy" type="number" >  
+		<br>
+		<span> z value</span><input id="posz" type="number" >  
+<!-- rotation now -->
+		<p> rotation</p>
+		<span> x val</span><input id="rotx" type="number" >  
+		<br>
+		<span> y val</span><input id="roty" type="number" >  
+		<br>
+		<span> z val</span><input id="rotz" type="number" >  
+
+		<br>
+		<span> Radius </span>
+		<input id="radius" type="number"> 
+		<br>
+		<span> height </span> <input id="radius" type="number"> 
+		<br>
+	<button onClick ="main()"> Start</button>
+	</body>
+
+</html>
