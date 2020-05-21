@@ -39,6 +39,13 @@ def generate_image(fName="savefig.png"):
   # this is the saving point. savefig.png is to be streamed to the frontend.    
   plt.savefig(fName)
   
+  design = Image.open(fName)
+  design_copy = design.copy()
+  img = Image.new('RGB', design.size, (255, 255, 255))
+  design_copy.paste(img)
+  img.save(fName, "PNG")
+  
+  return
   #unnecessary maybe but i am too lazy to change
   #plt.show()
   
