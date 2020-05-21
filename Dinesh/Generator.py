@@ -4,6 +4,7 @@ normal = tensorflow.random.normal
 from tensorflow.keras.models import load_model
 #to plot image
 import matplotlib.pyplot as plt
+from PIL import Image
 
 #load model from the h5 filepath
 #h5path = '/content/drive/My Drive/ProjectData/zigzaglinev1.h5' # for colab use by me
