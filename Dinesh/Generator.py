@@ -18,7 +18,7 @@ generator = load_model(h5path,compile=True)
 print("Loading model Complete")
 
 #defining the endpoint
-def generate_image(fName="savefig.png"):
+def generate_image(fName="savefig.jpg"):
   # 16 inputs to generate 16 images.
   # inside the for loop to generate new images each time
   test_input = normal([16, noise_dim])
@@ -36,14 +36,15 @@ def generate_image(fName="savefig.png"):
       #cancel axis from image
       plt.axis('off')
       
-  # this is the saving point. savefig.png is to be streamed to the frontend.    
+  # this is the saving point. savefig.png is to be streamed to the frontend.
+  # save as jpg to solve transparency issue
   plt.savefig(fName)
   
   design = Image.open(fName)
-  design_copy = design.copy()
-  img = Image.new('RGB', design.size, (255, 255, 255))
-  design_copy.paste(img)
-  img.save(fName, "PNG")
+  #design_copy = design.copy()
+  #img = Image.new('RGB', design.size, (255, 255, 255))
+  #design_copy.paste(img)
+  #design.save(fName, "PNG")
   
   return
   #unnecessary maybe but i am too lazy to change
