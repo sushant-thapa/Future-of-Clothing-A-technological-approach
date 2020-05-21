@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 #load model from the h5 filepath
 #h5path = '/content/drive/My Drive/ProjectData/zigzaglinev1.h5' # for colab use by me
-h5path = './zigzagline.h5' # for github
+h5path = './final32v3.h5' # for github
 
 #noise dimension of the input. DONOT change under any circumstances. value is 150 100+50 200-50
 noise_dim =150
