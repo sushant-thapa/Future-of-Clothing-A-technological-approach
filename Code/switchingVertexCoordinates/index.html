@@ -1,0 +1,156 @@
+
+<html>
+<script type ="module">
+	import * as THREE from "./three.js/build/three.module.js"
+	import {OBJLoader} from "./three.js/examples/jsm/loaders/OBJLoader.js" 
+	import {OrbitControls} from '../three.js/examples/jsm/controls/OrbitControls.js'
+	import * as ss from '/simple-statistics/dist/simple-statistics.mjs'
+
+	const meroCanvas = document.getElementById("myCanvas");
+	const renderer = new THREE.WebGLRenderer({canvas:meroCanvas})
+	let man;
+	
+	let arrayMax = [];
+	let arrayMin = [];
+
+
+//camera
+	const fov=90 //75 degrees 
+	const aspect = 2;
+	const near =0.1;
+	const far=10000;
+	const camera = new THREE.PerspectiveCamera(fov,aspect,near,far)
+		camera.position.z=3
+	let controls = new OrbitControls(camera,renderer.domElement);
+
+	const scene = new THREE.Scene();
+
+	
+	const material = new THREE.MeshPhongMaterial({color:0xffffff})
+	
+	let length = 1;
+	const geomtery = new THREE.BoxGeometry(length,length,length)
+	const cube = new THREE.Mesh(geomtery,material)
+	
+
+	
+
+	// we need some light
+	// hemisphere light
+	  {
+     const skyColor = 0xB1E1FF;  // light blue
+    const groundColor = 0xB97A20;  // brownish orange
+    const intensity = 1;
+    const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+    scene.add(light);
+  }
+
+	
+  const objLoader = new OBJLoader();
+ 
+  objLoader.load('triangleMax.obj', (root) => {
+  	arrayMax=root.children[0].geometry.attributes.position.array
+  	root.rotation.y=0;
+  	console.log(man)
+  	
+
+  	// turns out we cannot substitute just any array, but we need a float32 array, 
+
+  	// root.children[0].geometry.attributes.position.array=Float32Array.from([0,0,0,2,0,0,1,1,0]) 
+
+    man=root
+    scene.add(root);
+    console.log(man)
+    objLoader.load('triangleMin.obj',(root)=>{
+    	arrayMin=root.children[0].geometry.attributes.position.array
+    	calculateRegression(arrayMin,arrayMax,5)
+    })
+  });
+
+  
+
+	
+
+renderer.render(scene,camera)	
+
+function render(time)
+	{
+		scene.remove(man)
+		
+		let valueOfSlider = document.getElementById('mySlider').value
+		if (valueOfSlider == 1){
+				// console.log("scene should be added")
+				scene.remove(man)
+				man.children[0].geometry.attributes.position.array=Float32Array.from(arrayMin)
+				man.children[0].geometry.attributes.position.needsUpdate = true;
+				scene.add(man)
+				console.log(man)
+			}
+		else
+		{
+				// console.log("scene should be removed")
+				scene.remove(man)
+				man.children[0].geometry.attributes.position.array=Float32Array.from(arrayMax)	
+				man.children[0].geometry.attributes.position.needsUpdate = true;
+				scene.add(man)
+		}
+
+
+		controls.update()
+	
+		renderer.render(scene,camera)
+		scene.remove(man)
+		requestAnimationFrame(render)
+
+	}
+
+function addObject(arrayOfValues)
+{
+	objLoader.load('triangleMax.obj', (root) => {
+	man=root
+	man.children[0].geometry.attributes.position.array=Float32Array.from(arrayOfValues)
+    scene.add(man);
+  });
+}
+
+
+
+
+// The following function takes two arrays, arrayMin and arrayMax. arrayMin has a list of values and arrayMax has the same values which have been displaced. Not all the values displace in the same manner, so if we have 10 values, we may need 10 different linear regressions
+ 
+ // we are assuming that the values we pass in arrayMin and arrayMax are the dependent variable 
+
+// the third parameter, upperLimit gives the last value of the independent variable. Eg., if upperLimit =5, then regression will be calculated between (1,arrayMin[i]) and (upperLimit,arrayMin[i])
+
+function calculateRegression(arrayMin,arrayMax,upperLimit) 
+{
+	//
+	// we have to make array according to the format required by linearRegression function of Simple Statistics. i.e, an array of exactly two arrays, each of which further has exactly two elements, (ie the independent and the dependent value ). The function will return an object with keys y intercept and the slope
+	//
+	requestAnimationFrame(render)
+	let arrayToBeFed = [] // this is the array that will be fed to the linearRegression function of SS
+
+	for (let i=0;i<arrayMin.length;i++)
+	{
+		arrayToBeFed.push([[1,arrayMin[i]],[upperLimit,arrayMax[i]]]);
+	} 
+
+	let arrayOfRegression=[] // this will be an array of y-int and slope key value pairs
+
+	
+	for (let i =0;i<arrayMin.length;i++)
+	{
+		arrayOfRegression.push(ss.linearRegression(arrayToBeFed[i]))
+	}
+	
+}
+
+
+</script>
+	<body>
+		<canvas id="myCanvas" height="500" width="1000" ></canvas>
+		<input type = "range" min ='1' max = '2' class="slider" id="mySlider">
+
+	</body>
+
+</html>
