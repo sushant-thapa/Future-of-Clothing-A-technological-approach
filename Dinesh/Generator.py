@@ -37,7 +37,7 @@ def generate_image(fName="savefig.png"):
     generator_output = generator(generator128, [noise128, generator_input])
     
     #save the 16 images obtained as savefig.png
-    save_image(generator_output)
+    save_image(generator_output,fName)
 
 
 
