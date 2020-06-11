@@ -4,6 +4,7 @@ normal = tensorflow.random.normal
 from tensorflow.keras.models import load_model
 #to plot image
 import matplotlib.pyplot as plt
+from PIL import Image
 
 #defining the endpoint
 def generate_image(fName="savefig.png"):

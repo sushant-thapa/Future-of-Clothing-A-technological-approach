@@ -1,0 +1,4 @@
+genericwaist = 31.48 inches
+minwaist = 28.77 inches
+midwaist = 36.68 inches
+maxwaist = 48 inches

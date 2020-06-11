@@ -1,0 +1,154 @@
+
+<html>
+<script type ="module">
+	import * as THREE from "./three.js/build/three.module.js"
+	import {OBJLoader} from "./three.js/examples/jsm/loaders/OBJLoader.js" 
+	import {OrbitControls} from '../three.js/examples/jsm/controls/OrbitControls.js'
+	import * as ss from '/simple-statistics/dist/simple-statistics.mjs'
+
+	//some global variables
+	window.upperLimitOfParameter = '5';
+	document.getElementById('mySlider').setAttribute('max',upperLimitOfParameter)
+	const meroCanvas = document.getElementById("myCanvas");
+	const renderer = new THREE.WebGLRenderer({canvas:meroCanvas})
+	const scene = new THREE.Scene();
+
+	let man;
+	let arrayMax = []; // this is the array of vertices for the minimum object
+	let arrayMin = []; // this is the array of vertices for the maximum object
+	let arrayOfRegression=[] // this will be an array of y-int and slope key value pairs
+	const camera = new THREE.PerspectiveCamera(75,2,0.1,10000)
+	camera.position.z=10
+
+	let controls = new OrbitControls(camera,renderer.domElement);
+
+	// we need some light
+	// hemisphere light
+	{
+  	  	const light = new THREE.HemisphereLight(0xB1E1FF,0xB97A20,1);
+    	scene.add(light);
+  	}
+
+	
+  const objLoader = new OBJLoader();
+ 
+ 	// loading the object for the first time
+
+  objLoader.load('triangleMax.obj', (root) => {
+	  	arrayMax=root.children[0].geometry.attributes.position.array
+	  	root.rotation.y=0;
+	  	
+
+	  	// turns out we cannot substitute just any array, but we need a float32 array, 
+	  	// root.children[0].geometry.attributes.position.array=Float32Array.from([0,0,0,2,0,0,1,1,0]) 
+	    man=root
+	    scene.add(root);
+	    // loading the second object
+	    objLoader.load('triangleMin.obj',(root)=>{
+	    	arrayMin=root.children[0].geometry.attributes.position.array
+			calculateRegressionAndContinue(arrayMin,arrayMax,5) // calculates the regression
+    })
+  });
+
+  
+
+	
+
+renderer.render(scene,camera)	
+
+function render(time)
+	{
+
+		//you can check if arrayOfRegression has loaded, else not just skip 
+		// if it has loaded then proceed to calculate intermediate values
+		scene.remove(man)
+		let valueOfSlider = document.getElementById('mySlider').value
+		var currentArray = calculateIntermediateValues(valueOfSlider) // we calculated the intermediate value
+
+		document.getElementById('scratchPad').innerHTML=valueOfSlider
+
+		
+		man.children[0].geometry.attributes.position.array=Float32Array.from(currentArray)
+		man.children[0].geometry.attributes.position.needsUpdate = true;
+		scene.add(man)
+				
+
+
+		controls.update()
+		renderer.render(scene,camera)
+		scene.remove(man)
+		requestAnimationFrame(render)
+
+	}
+
+function addObject(arrayOfValues)
+{
+	objLoader.load('triangleMax.obj', (root) => {
+	man=root
+	man.children[0].geometry.attributes.position.array=Float32Array.from(arrayOfValues)
+    scene.add(man);
+  });
+}
+
+
+
+
+// The following function takes two arrays, arrayMin and arrayMax. arrayMin has a list of values and arrayMax has the same values which have been displaced. Not all the values displace in the same manner, so if we have 10 values, we may need 10 different linear regressions
+ 
+ // we are assuming that the values we pass in arrayMin and arrayMax are the dependent variable 
+
+// the third parameter, upperLimit gives the last value of the independent variable. Eg., if upperLimit =5, then regression will be calculated between (1,arrayMin[i]) and (upperLimit,arrayMin[i])
+
+function calculateRegressionAndContinue(arrayMin,arrayMax,upperLimit) 
+{
+	//
+	// we have to make array according to the format required by linearRegression function of Simple Statistics. i.e, an array of exactly two arrays, each of which further has exactly two elements, (ie the independent and the dependent value ). The function will return an object with keys y intercept and the slope
+	//
+	
+	let arrayToBeFed = [] // this is the array that will be fed to the linearRegression function of SS
+
+	for (let i=0;i<arrayMin.length;i++)
+	{
+		arrayToBeFed.push([[1,arrayMin[i]],[upperLimit,arrayMax[i]]]);
+	} 
+
+	
+
+	
+	for (let i =0;i<arrayMin.length;i++)
+	{
+		arrayOfRegression.push(ss.linearRegression(arrayToBeFed[i]))
+	}
+
+	requestAnimationFrame(render)
+}
+
+
+function calculateIntermediateValues(parameter)
+{
+	// let's say parameter varies from param = 1 to param = 5
+
+	// although we are iterating over the arrayOfRegression, the loop works for any array that we wish to calculate as the number is same in all
+	console.log(arrayOfRegression)
+	let returnArray = []; // this has the actual vertices that we need to calculate
+	for (let i=0;i<arrayOfRegression.length;i++)
+	{
+		// say the parameter is 2, then we need, y = mx+c, right? so 
+		let y = arrayOfRegression[i].m *parameter +arrayOfRegression[i].b;
+		returnArray.push(y)
+	}
+return returnArray;
+
+}
+
+
+</script>
+	<body>
+		<canvas id="myCanvas" height="500" width="1000" ></canvas>
+		<input type = "range" min ='1' class="slider" id="mySlider">
+		<p id="scratchPad"> </p>
+	</body>
+<script>
+	
+</script>
+</html>
