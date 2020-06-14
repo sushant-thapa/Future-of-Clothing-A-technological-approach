@@ -23,9 +23,13 @@
     "gatsby-plugin-typography": "^2.5.0",
     "gatsby-source-filesystem": "^2.3.0",
     "gatsby-transformer-sharp": "^2.5.0",
+    "ink": "^2.7.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-typography": "^0.16.19",
+    "simple-statistics": "^7.1.0",
+    "three": "^0.116.1",
+    "three-obj-loader": "^1.1.3",
     "typography": "^0.16.19",
     "typography-theme-alton": "^0.16.19"
   },

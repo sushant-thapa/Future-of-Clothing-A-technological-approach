@@ -6,6 +6,12 @@
 const path = require(`path`)
 
 module.exports = {
+  proxy:[
+    {
+      prefix: "/dinesh",
+      url:"http://34.87.150.173"
+    },
+  ],
   /* Your site config here */
   plugins: [
     "gatsby-plugin-antd",
@@ -19,7 +25,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "designs",
-        path: path.join(__dirname,'static','images','designs')
+        path: path.join(__dirname,'static')
       }
     },
     `gatsby-plugin-sharp`,
