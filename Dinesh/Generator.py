@@ -25,16 +25,16 @@ def generate_image(fName="savefig.png"):
     
     #noise dimension of the input. DONOT change under any circumstances. value is 150 100+50 200-50
     noise_dim32 =150
-    noise_dim128=20
+    noise_dim128=100
     
     #create noise inputs for the system
     noise32 = normal([16, noise_dim32])
-    noise128 = normal([16, noise_dim32])
+    noise128 = normal([16, noise_dim128])
     
     #input for larger generator from smaller generator
     generator_input = generator(generator32, noise32)
     #output from larger generator
-    generator_output = generator(generator128, [noise128, generator_input])
+    generator_output = generator(generator128, [generator_input, noise128])
     
     #save the 16 images obtained as savefig.png
     save_image(generator_output,fName)
@@ -42,7 +42,7 @@ def generate_image(fName="savefig.png"):
 
 
 def generator(model, test_input):
-    prediction = generator(test_input, training = False)
+    prediction = model(test_input, training = False)
     return prediction
 
 def save_image(predictions, fName='savefig.png'):
